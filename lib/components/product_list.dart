@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import '../variables/colors.dart';
 import '../pages/category/category_page.dart';
+import '../pages/product_detail/product_detail.page.dart';
+import '../consts/graphql_pdp.dart';
 
 const productsGrapQl = """
-    query product(\$categoryId: String!){
-        products(filter: {category_id: {eq: \$categoryId  }}) {
+    query product(\$categoryId: String! ){
+        products(filter: {category_id: {eq: \$categoryId}}) {
           total_count
           items {
             id
@@ -73,7 +75,11 @@ class ProductItem extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductDetail.routeName,
+                              arguments: {"skuProduct": productList[index]['sku']});
+                        },
                         child: Image.network(
                           productList[index]['image']['url'],
                           width: 184,

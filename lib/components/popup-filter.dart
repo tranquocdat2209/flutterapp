@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import '../variables/colors.dart';
 import '../components/input-checkbox.dart';
+import '../consts/graphql_pdp.dart';
 
-class CategoryFilter extends StatelessWidget {
-  const CategoryFilter({super.key});
-  final String filterOptions = """
+const String filterOptions = """
       query dataFilterOptionQL {
       products(filter: { category_id: { eq: 23 } }) {
         total_count
@@ -22,6 +21,10 @@ class CategoryFilter extends StatelessWidget {
       }
     }
   """;
+
+class CategoryFilter extends StatelessWidget {
+  const CategoryFilter({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -19,8 +19,6 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
-    var ab = arg["categoryId"];
-    print(ab.runtimeType);
     return SafeArea(
         child: Scaffold(
           key: Ftkey,
@@ -30,9 +28,9 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           appBar: buildAppBar(),
           body: Column(
-            children: const [
+            children: [
               CategoryAction(),
-              ProductItem(categoryId: 23),
+              ProductItem(categoryId: arg["categoryId"]),
 
             ],
           ),

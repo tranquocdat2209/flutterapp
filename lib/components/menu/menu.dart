@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../variables/colors.dart';
 import '../../pages/category/category_page.dart';
+import '../../consts/graphql_pdp.dart';
 
 const menuGrapQl = """
     query menu{
@@ -28,6 +29,7 @@ const menuGrapQl = """
             path
             children_count
             children {
+              id
               uid
               level
               name
@@ -43,7 +45,6 @@ const menuGrapQl = """
       }
     }
 """;
-
 class Menu extends StatelessWidget {
   const Menu({super.key});
 
@@ -99,7 +100,6 @@ class Menu extends StatelessWidget {
                 itemCount: menuList.length,
                 itemBuilder: (context, index) {
                   final menuListlv3 = menuList[index]['children'];
-                  // print(menuList[index]["id"]);
                   if (menuListlv3.length == 0) {
                     return Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -111,7 +111,7 @@ class Menu extends StatelessWidget {
                             SizedBox(
                               width: 20,
                               height: 20,
-                              child: Image.asset("images/image4.png"),
+                                child: Image.network(menuList[index]['image'],fit: BoxFit.cover,)
                             ),
                             SizedBox(
                               width: 10,
@@ -130,13 +130,17 @@ class Menu extends StatelessWidget {
                               EdgeInsets.only(bottom: 15, left: 30),
                           textColor: colorTheme,
                           title: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, CategoryPage.routeName,
+                                  arguments: {"categoryId": menuList[index]["id"]});
+                            },
                             child: Row(
                               children: [
                                 SizedBox(
                                   width: 20,
                                   height: 20,
-                                  child: Image.asset("images/image4.png"),
+                                  child: Image.network(menuList[index]['image'],fit: BoxFit.cover,),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -158,7 +162,7 @@ class Menu extends StatelessWidget {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, CategoryPage.routeName,
-                                            arguments: {"categoryId": menuList[index]["id"]});
+                                            arguments: {"categoryId": menuListlv3[index]["id"]});
                                       },
                                       child: Container(
                                         padding:

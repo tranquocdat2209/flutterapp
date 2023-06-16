@@ -3,6 +3,7 @@ import './pages/category/category_page.dart';
 import './pages/home/home_page.dart';
 import './variables/colors.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import './pages/product_detail/product_detail.page.dart';
 
 void main() {
 final HttpLink httpLink = HttpLink("https://flutter.ecommage.com/graphql/");
@@ -24,6 +25,7 @@ final HttpLink httpLink = HttpLink("https://flutter.ecommage.com/graphql/");
         routes:{
           HomePage.routeName: (context) => HomePage(),
           CategoryPage.routeName: (context) => CategoryPage(),
+          ProductDetail.routeName: (context) => ProductDetail()
         },
 
     ),
